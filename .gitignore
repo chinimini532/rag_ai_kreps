@@ -1,0 +1,11 @@
+# Ignore raw data
+data/raw_documents/
+
+# Ignore vector indexes later
+data/vector_index/
+
+# Ignore env & cache
+.env
+__pycache__/
+*.pyc
+
