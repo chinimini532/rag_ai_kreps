@@ -12,12 +12,23 @@ class VectorIndexer:
     Uses explicit vector IDs for metadata alignment.
     """
 
-    def __init__(self, index_dir: Path):
-        self.index_dir = Path(index_dir)
-        self.index_dir.mkdir(parents=True, exist_ok=True)
+def __init__(self, index_dir=None, *args, **kwargs):
+    from pathlib import Path
 
-        self.index_path = self.index_dir / "faiss.index"
-        self.index = None
+    if index_dir is None:
+        index_dir = Path("data/vector_index")
+
+    self.index_dir = Path(index_dir)
+    self.index_dir.mkdir(parents=True, exist_ok=True)
+
+    self.index_path = self.index_dir / "faiss.index"
+    self.index = None
+
+    if self.index_path.exists():
+        self.load()
+
+
+
 
     def _create_index(self, dim: int):
         """
